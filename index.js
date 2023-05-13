@@ -1,5 +1,4 @@
 // Code For Identifying the Clicks
-
 for (i = 0; i < document.querySelectorAll(".drum").length; i++) {
   document.querySelectorAll("button")[i].addEventListener("click", handleClick);
 }
@@ -7,14 +6,17 @@ for (i = 0; i < document.querySelectorAll(".drum").length; i++) {
 function handleClick() {
   var buttonInnerHTML = this.innerHTML;
  makeSound(buttonInnerHTML);
+ buttonAnimation(buttonInnerHTML);
 }
 
 // Code for Identifying the KeyPress
 document.addEventListener("keypress",function(event)
 {
     makeSound(event.key);
+    buttonAnimation(event.key);
 });
 
+//Code for making the Sound
 function makeSound(key)
 {
  switch (key) {
@@ -55,4 +57,14 @@ function makeSound(key)
         console.log("Wrong Key Pressed.");
         break;
 }
+}
+
+function buttonAnimation(currentKey)
+{
+    var activeButton= document.querySelector("."+currentKey);
+    activeButton.classList.add("pressed");
+    setTimeout(function()
+      {
+        activeButton.classList.remove("pressed")
+      },100);
 }
